@@ -3,13 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VOLTTI | Desktop Streaming</title>
+    <title>VOLTTI | Premium Desktop Streaming</title>
+    
     <link rel="stylesheet" href="style.css">
+    
+    <link rel="icon" type="image/png" href="logo-voltti.png">
 </head>
 <body>
 
     <header>
-        <div class="logo">VOLTTI</div>
+        <div class="logo" onclick="window.location.reload()">VOLTTI</div>
+        
         <nav>
             <ul class="nav-links">
                 <li><a href="#" onclick="filtrar('todos')">Início</a></li>
@@ -20,6 +24,7 @@
                 <li><a href="#" onclick="filtrar('novela')">Novelas</a></li>
             </ul>
         </nav>
+
         <div class="header-right">
             <a href="pagar.html" id="botao-pagar" class="btn-assinar">ASSINAR MENSAL</a>
         </div>
@@ -30,8 +35,10 @@
             <div class="player-container">
                 <iframe id="main-player" src="" frameborder="0" allowfullscreen></iframe>
             </div>
+            
             <div class="player-info">
-                <h1 id="video-title">Selecione um título para começar</h1>
+                <h1 id="video-title">Selecione um conteúdo para assistir</h1>
+                
                 <div id="lista-eps" class="episode-grid"></div>
             </div>
         </section>
@@ -41,11 +48,15 @@
     </main>
 
     <footer>
-        <p>&copy; 2026 VOLTTI - Experiência Desktop</p>
+        <div class="footer-logo">VOLTTI</div>
         <div class="footer-links">
-            <a href="https://wa.me/5598981296742" target="_blank">Suporte</a>
-            <a href="pagar.html">Minha Assinatura</a>
+            <a href="https://wa.me/5598981296742" target="_blank">Suporte WhatsApp</a>
+            <a href="pagar.html">Planos e Preços</a>
+            <a href="#" onclick="localStorage.clear(); location.reload();">Sair / Trocar Conta</a>
         </div>
+        <p style="color: #444; font-size: 0.8em; margin-top: 20px;">
+            © 2026 VOLTTI Streaming - Alta Definição em Desktop
+        </p>
     </footer>
 
     <script src="script.js"></script>
