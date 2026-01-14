@@ -3,14 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VOLTTI | Desktop</title>
+    <title>VOLTTI | Premium Desktop</title>
+    
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#e50914">
+    <link rel="icon" type="image/png" href="logo-voltti.png">
+
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
     <header>
         <div class="logo" onclick="window.location.reload()">VOLTTI</div>
+        
         <nav>
             <ul class="nav-links">
                 <li><a href="#" onclick="filtrar('todos')">Início</a></li>
@@ -18,8 +23,10 @@
                 <li><a href="#" onclick="filtrar('serie')">Séries</a></li>
                 <li><a href="#" onclick="filtrar('dorama')">Doramas</a></li>
                 <li><a href="#" onclick="filtrar('anime')">Animes</a></li>
+                <li><a href="#" onclick="filtrar('novela')">Novelas</a></li>
             </ul>
         </nav>
+
         <div class="header-right">
             <button id="btnInstalar" class="btn-app" style="display:none;">BAIXAR APP PC</button>
             <a href="pagar.html" id="botao-pagar" class="btn-assinar">ASSINAR MENSAL</a>
@@ -27,28 +34,57 @@
     </header>
 
     <main>
-        <section class="hero-player">
+        <section class="hero-player" id="player-section">
             <div class="player-container">
                 <iframe id="main-player" src="" frameborder="0" allowfullscreen></iframe>
             </div>
             <div class="player-info">
-                <h1 id="video-title">Escolha um título</h1>
+                <h1 id="video-title">Selecione um título para assistir</h1>
                 <div id="lista-eps" class="episode-grid"></div>
             </div>
         </section>
+
         <section class="content-grid" id="movie-grid"></section>
     </main>
 
+    <footer>
+        <div class="footer-logo">VOLTTI</div>
+        <p style="color: #666;">Seu streaming privado de alta performance.</p>
+        <div class="footer-links">
+            <a href="https://wa.me/5598981296742" target="_blank">Suporte WhatsApp</a>
+            <a href="pagar.html">Assinar Plano Mensal</a>
+            <a href="#" onclick="localStorage.clear(); location.reload();">Sair / Trocar Conta</a>
+        </div>
+        <p class="copyright">© 2026 VOLTTI - Todos os direitos reservados</p>
+    </footer>
+
     <script src="script.js"></script>
     <script>
-        if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js'); }
-        let promptInstalar;
+        // Registro do Service Worker para PWA
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js');
+        }
+
+        // Lógica do botão de instalação
+        let deferredPrompt;
+        const btnInstalar = document.getElementById('btnInstalar');
+
         window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault(); promptInstalar = e;
-            document.getElementById('btnInstalar').style.display = 'block';
+            e.preventDefault();
+            deferredPrompt = e;
+            btnInstalar.style.display = 'block';
         });
-        document.getElementById('btnInstalar').addEventListener('click', () => {
-            if (promptInstalar) { promptInstalar.prompt(); }
+
+        btnInstalar.addEventListener('click', () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        btnInstalar.style.display = 'none';
+                    }
+                    deferredPrompt = null;
+                });
+            }
         });
     </script>
 </body>
