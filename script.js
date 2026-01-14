@@ -1,5 +1,5 @@
-// A mesma base de dados do Mobile
 const conteudos = [
+    // --- FILMES ---
     { titulo: "A Morte Pede Carona (2007)", capaID: "13hcPWKedhsuyKJjDnkA1OKsDBsqNQt9Q", videoID: "1Dv2kWhQBm1pp2QEWDmzgqQfK0Cs8bYlo", tipo: "filme", genero: "Terror" },
     { titulo: "Cão de Briga (2005)", capaID: "1eQqmBbC-ynXoywSlftsWEn-AkTbDo6q0", videoID: "1S2ACOJIWCTT3iXqQZ91pl1-RLWxxZOuH", tipo: "filme", genero: "Ação" },
     { titulo: "O Massacre da Serra Elétrica", capaID: "1x3pTkU1IDAras3s9fez0zAamgS6VeaRN", videoID: "1-gh6yP-OhYiCsCVa5V4-vUcxk2eXCu2J", tipo: "filme", genero: "Terror" },
@@ -17,9 +17,16 @@ const conteudos = [
     { titulo: "After", capaID: "1SM2PN1hPWL0Z_mQRFTVvMoPBwtqD9rtB", videoID: "1RZE1S_UCi9DA-Q-9DZIKTyQmuBNSPHQ_", tipo: "filme", genero: "Romance" },
     { titulo: "After 2", capaID: "1CROr0ySxN7qjeMXr70nFEdqxG_XCelsz", videoID: "1WL6DAD7y0qJz7gU2Tri1DLgk7Dbhimus", tipo: "filme", genero: "Romance" },
     { titulo: "After 3", capaID: "1Z7TTYmECxz9QDotu3fRfOiQhsOO8MFjx", videoID: "1TNmCJVNQCEUChOtZ69Ono4hsD61PUGl4", tipo: "filme", genero: "Romance" },
+
+    // --- DORAMAS ---
     { 
-        titulo: "A Má Mãe", capaID: "1_NY-gbUM21gbOdsBf56zVjNtm8KUDYoi", tipo: "dorama", genero: "Dorama",
-        episodios: [{ nome: "Episódio 01", videoID: "1_tOC-zRf2hIDxrmZiHd3gpImrj0yIWzV" }]
+        titulo: "A Má Mãe", 
+        capaID: "1_NY-gbUM21gbOdsBf56zVjNtm8KUDYoi", 
+        tipo: "dorama", 
+        genero: "Dorama",
+        episodios: [
+            { nome: "Episódio 01", videoID: "1_tOC-zRf2hIDxrmZiHd3gpImrj0yIWzV" }
+        ]
     }
 ];
 
@@ -28,7 +35,6 @@ const player = document.getElementById('main-player');
 const titleDisplay = document.getElementById('video-title');
 const listaEpsContainer = document.getElementById('lista-eps');
 
-// 1. ESCONDE O BOTÃO DE COMPRA SE JÁ TIVER ACESSO
 function verificarAcessoBotao() {
     const chaveCorreta = "VOLTTI5";
     const botaoCompra = document.getElementById('botao-pagar');
@@ -39,10 +45,10 @@ function verificarAcessoBotao() {
     } catch (e) {}
 }
 
-// 2. VALIDAÇÃO DE CHAVE
 function validarChave() {
     const chaveCorreta = "VOLTTI5";
     if (localStorage.getItem("voltti_chave") === chaveCorreta) return true;
+    
     const senha = prompt("Insira a chave de acesso mensal:");
     if (senha === chaveCorreta) {
         localStorage.setItem("voltti_chave", chaveCorreta);
@@ -53,14 +59,12 @@ function validarChave() {
     return false;
 }
 
-// 3. PLAY
 function darPlay(id, titulo) {
     player.src = `https://drive.google.com/file/d/${id}/preview`;
     titleDisplay.innerText = titulo;
     window.scrollTo({top: 0, behavior: 'smooth'});
 }
 
-// 4. RENDERIZAR GRID (PC usa Grid Layout)
 function renderizar(lista) {
     grid.innerHTML = "";
     const generos = [...new Set(lista.map(item => item.genero))];
@@ -74,16 +78,17 @@ function renderizar(lista) {
         lista.filter(i => i.genero === gen).forEach(item => {
             const card = document.createElement('div');
             card.className = 'card';
-            card.innerHTML = `
-                <img src="https://drive.google.com/thumbnail?authuser=0&sz=w400&id=${item.capaID}">
-                <p>${item.titulo}</p>
-            `;
+            card.innerHTML = `<img src="https://drive.google.com/thumbnail?authuser=0&sz=w400&id=${item.capaID}"><p>${item.titulo}</p>`;
+            
             card.onclick = () => {
-                if (item.episodios) {
-                    gerarListaEpisodios(item);
-                } else {
-                    listaEpsContainer.innerHTML = "";
-                    if (validarChave()) darPlay(item.videoID, item.titulo);
+                // SÓ ABRE SE VALIDAR A CHAVE PRIMEIRO
+                if (validarChave()) {
+                    if (item.episodios) {
+                        gerarListaEpisodios(item);
+                    } else {
+                        listaEpsContainer.innerHTML = "";
+                        darPlay(item.videoID, item.titulo);
+                    }
                 }
             };
             linha.appendChild(card);
@@ -92,7 +97,6 @@ function renderizar(lista) {
     });
 }
 
-// 5. EPISÓDIOS
 function gerarListaEpisodios(serie) {
     titleDisplay.innerText = serie.titulo;
     listaEpsContainer.innerHTML = ""; 
@@ -100,16 +104,15 @@ function gerarListaEpisodios(serie) {
         const btn = document.createElement('button');
         btn.innerText = ep.nome;
         btn.className = "btn-episodio";
-        btn.onclick = () => { if (validarChave()) darPlay(ep.videoID, `${serie.titulo} - ${ep.nome}`); };
+        btn.onclick = () => { darPlay(ep.videoID, `${serie.titulo} - ${ep.nome}`); };
         listaEpsContainer.appendChild(btn);
     });
 }
 
-// 6. FILTRO
 function filtrar(tipo) {
     renderizar(tipo === 'todos' ? conteudos : conteudos.filter(i => i.tipo === tipo));
 }
 
-// INICIAR
+// INICIALIZAÇÃO
 renderizar(conteudos);
 verificarAcessoBotao();
