@@ -3,20 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VOLTTI | Desktop</title>
+    <title>VOLTTI | Desktop Streaming</title>
     <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#e50914">
+    <link rel="icon" type="image/png" href="logo-voltti.png">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <header>
-        <div class="logo">VOLTTI</div>
+        <div class="logo" onclick="window.location.reload()">VOLTTI</div>
         <nav>
             <ul class="nav-links">
                 <li><a href="#" onclick="filtrar('todos')">Início</a></li>
                 <li><a href="#" onclick="filtrar('filme')">Filmes</a></li>
                 <li><a href="#" onclick="filtrar('serie')">Séries</a></li>
                 <li><a href="#" onclick="filtrar('dorama')">Doramas</a></li>
+                <li><a href="#" onclick="filtrar('anime')">Animes</a></li>
             </ul>
         </nav>
         <div class="header-right">
@@ -31,7 +34,7 @@
                 <iframe id="main-player" src="" frameborder="0" allowfullscreen></iframe>
             </div>
             <div class="player-info">
-                <h1 id="video-title">Selecione um título</h1>
+                <h1 id="video-title">Selecione um título para assistir</h1>
                 <div id="lista-eps" class="episode-grid"></div>
             </div>
         </section>
@@ -41,22 +44,27 @@
 
     <footer>
         <div class="footer-logo">VOLTTI</div>
+        <p style="color: #666; margin-bottom: 20px;">Sua plataforma premium de entretenimento.</p>
         <div class="footer-links">
             <a href="https://wa.me/5598981296742" target="_blank">Suporte WhatsApp</a>
             <a href="#" onclick="localStorage.clear(); location.reload();">Sair / Trocar Conta</a>
         </div>
-        <p class="copyright">© 2026 VOLTTI Streaming - Todos os direitos reservados</p>
+        <p class="copyright">© 2026 VOLTTI - Todos os direitos reservados</p>
     </footer>
 
     <script src="script.js"></script>
     <script>
+        // Lógica PWA para o botão de baixar app
         if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js'); }
-        let promptI;
+        let promptInstalacao;
         window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault(); promptI = e;
+            e.preventDefault();
+            promptInstalacao = e;
             document.getElementById('btnInstalar').style.display = 'block';
         });
-        document.getElementById('btnInstalar').onclick = () => { if(promptI) promptI.prompt(); };
+        document.getElementById('btnInstalar').addEventListener('click', () => {
+            if (promptInstalacao) promptInstalacao.prompt();
+        });
     </script>
 </body>
 </html>
