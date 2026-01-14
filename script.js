@@ -1,3 +1,4 @@
+// A mesma base de dados do Mobile
 const conteudos = [
     { titulo: "A Morte Pede Carona (2007)", capaID: "13hcPWKedhsuyKJjDnkA1OKsDBsqNQt9Q", videoID: "1Dv2kWhQBm1pp2QEWDmzgqQfK0Cs8bYlo", tipo: "filme", genero: "Terror" },
     { titulo: "Cão de Briga (2005)", capaID: "1eQqmBbC-ynXoywSlftsWEn-AkTbDo6q0", videoID: "1S2ACOJIWCTT3iXqQZ91pl1-RLWxxZOuH", tipo: "filme", genero: "Ação" },
@@ -25,10 +26,9 @@ const conteudos = [
 const grid = document.getElementById('movie-grid');
 const player = document.getElementById('main-player');
 const titleDisplay = document.getElementById('video-title');
-const navMenu = document.getElementById('nav-menu');
-const mobileMenu = document.getElementById('mobile-menu');
 const listaEpsContainer = document.getElementById('lista-eps');
 
+// 1. ESCONDE O BOTÃO DE COMPRA SE JÁ TIVER ACESSO
 function verificarAcessoBotao() {
     const chaveCorreta = "VOLTTI5";
     const botaoCompra = document.getElementById('botao-pagar');
@@ -39,10 +39,11 @@ function verificarAcessoBotao() {
     } catch (e) {}
 }
 
+// 2. VALIDAÇÃO DE CHAVE
 function validarChave() {
     const chaveCorreta = "VOLTTI5";
     if (localStorage.getItem("voltti_chave") === chaveCorreta) return true;
-    const senha = prompt("Insira a chave de acesso:");
+    const senha = prompt("Insira a chave de acesso mensal:");
     if (senha === chaveCorreta) {
         localStorage.setItem("voltti_chave", chaveCorreta);
         verificarAcessoBotao();
@@ -52,24 +53,31 @@ function validarChave() {
     return false;
 }
 
+// 3. PLAY
 function darPlay(id, titulo) {
     player.src = `https://drive.google.com/file/d/${id}/preview`;
     titleDisplay.innerText = titulo;
     window.scrollTo({top: 0, behavior: 'smooth'});
 }
 
+// 4. RENDERIZAR GRID (PC usa Grid Layout)
 function renderizar(lista) {
     grid.innerHTML = "";
     const generos = [...new Set(lista.map(item => item.genero))];
+    
     generos.forEach(gen => {
         const secao = document.createElement('div');
         secao.className = 'genero-secao';
         secao.innerHTML = `<h3 class="genero-titulo">${gen}</h3><div class="genero-linha"></div>`;
         const linha = secao.querySelector('.genero-linha');
+        
         lista.filter(i => i.genero === gen).forEach(item => {
             const card = document.createElement('div');
             card.className = 'card';
-            card.innerHTML = `<img src="https://drive.google.com/thumbnail?authuser=0&sz=w400&id=${item.capaID}"><p>${item.titulo}</p>`;
+            card.innerHTML = `
+                <img src="https://drive.google.com/thumbnail?authuser=0&sz=w400&id=${item.capaID}">
+                <p>${item.titulo}</p>
+            `;
             card.onclick = () => {
                 if (item.episodios) {
                     gerarListaEpisodios(item);
@@ -84,6 +92,7 @@ function renderizar(lista) {
     });
 }
 
+// 5. EPISÓDIOS
 function gerarListaEpisodios(serie) {
     titleDisplay.innerText = serie.titulo;
     listaEpsContainer.innerHTML = ""; 
@@ -96,11 +105,11 @@ function gerarListaEpisodios(serie) {
     });
 }
 
+// 6. FILTRO
 function filtrar(tipo) {
-    navMenu.classList.remove('active');
     renderizar(tipo === 'todos' ? conteudos : conteudos.filter(i => i.tipo === tipo));
 }
 
-mobileMenu.onclick = () => navMenu.classList.toggle('active');
+// INICIAR
 renderizar(conteudos);
 verificarAcessoBotao();
