@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assinatura - VOLTTI</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body { 
+            background-color: #0f1014; 
+            color: white; 
+            font-family: 'Segoe UI', Arial, sans-serif; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+            margin: 0; 
+        }
+        .pagar-container {
+            max-width: 380px;
+            width: 90%;
+            padding: 30px;
+            background: #16171a;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid #2a2a2a;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.8);
+        }
+        .logo-pagar { 
+            font-size: 2.5em; 
+            font-weight: bold; 
+            color: #e50914; 
+            margin-bottom: 5px; 
+            letter-spacing: 2px;
+        }
+        .preco-box {
+            background: rgba(229, 9, 20, 0.1);
+            padding: 15px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border: 1px solid #e50914; /* Borda vermelha */
+        }
+        .preco-label { font-size: 0.8em; color: #e50914; text-transform: uppercase; font-weight: bold; }
+        .preco-valor { font-size: 2.2em; font-weight: bold; color: #fff; }
+        
+        .pix-area {
+            background: #222327;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            border: 1px solid #333;
+        }
+        .chave-label { font-size: 0.75em; color: #777; margin-bottom: 8px; display: block; }
+        .chave-pix { 
+            font-size: 1.1em; 
+            color: #fff; /* Removido o azul, agora é branco/cinza claro */
+            font-weight: bold; 
+            word-break: break-all;
+        }
+
+        .instrucoes {
+            text-align: left;
+            font-size: 0.85em;
+            color: #bbb;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+        .instrucoes b { color: #e50914; }
+
+        /* BOTÃO WHATSAPP EM VERMELHO VOLTTI */
+        .btn-whatsapp {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #e50914; /* Vermelho VOLTTI */
+            color: white;
+            padding: 18px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(229, 9, 20, 0.3);
+            border: none;
+            cursor: pointer;
+        }
+        .btn-whatsapp:hover { 
+            background: #b20710; 
+            transform: translateY(-2px); 
+        }
+        
+        .voltar {
+            display: inline-block;
+            margin-top: 20px;
+            color: #555;
+            text-decoration: none;
+            font-size: 0.85em;
+        }
+        .voltar:hover { color: #e50914; }
+    </style>
+</head>
+<body>
+
+    <div class="pagar-container">
+        <div class="logo-pagar">VOLTTI</div>
+        <p style="color:#666; font-size: 0.9em;">Assinatura Premium Mensal</p>
+
+        <div class="preco-box">
+            <div class="preco-label">Plano 30 Dias</div>
+            <div class="preco-valor">R$ 5,00</div>
+        </div>
+
+        <div class="instrucoes">
+            <b>1.</b> Use a chave PIX abaixo para pagar.<br>
+            <b>2.</b> Tire um print do comprovante.<br>
+            <b>3.</b> Clique no botão para enviar via WhatsApp.<br>
+            <b>4.</b> Receba seu código de acesso mensal.
+        </div>
+
+        <div class="pix-area">
+            <span class="chave-label">CHAVE PIX (E-MAIL):</span>
+            <span class="chave-pix">volttiservicos@gmail.com</span>
+        </div>
+
+        <a href="https://wa.me/5598981296742?text=segue%20comprovante%20aguardando%20pelo%20o%20codigo" class="btn-whatsapp" target="_blank">
+            ENVIAR COMPROVANTE
+        </a>
+
+        <a href="index.html" class="voltar">← Voltar para a Galeria</a>
+    </div>
+
+</body>
+</html>
