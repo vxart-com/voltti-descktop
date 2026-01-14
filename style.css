@@ -1,44 +1,52 @@
+/* RESET E CORES */
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { background-color: #0f1014; color: white; font-family: 'Segoe UI', sans-serif; overflow-x: hidden; }
+body { background-color: #0f1014; color: white; font-family: sans-serif; overflow-x: hidden; }
 
-header {
-    height: 80px; display: flex; justify-content: space-between; align-items: center;
-    padding: 0 5%; background: rgba(0,0,0,0.95); position: fixed; width: 100%; top: 0; z-index: 1000;
-    border-bottom: 1px solid #1a1a1a;
+/* HEADER */
+header { 
+    height: 80px; display: flex; justify-content: space-between; align-items: center; 
+    padding: 0 5%; background: rgba(0,0,0,0.9); position: fixed; width: 100%; top:0; z-index: 1000;
 }
-
-.logo { color: #e50914; font-size: 2.2em; font-weight: bold; cursor: pointer; letter-spacing: 2px; }
-.nav-links { display: flex; list-style: none; gap: 25px; }
-.nav-links a { color: #ccc; text-decoration: none; font-size: 1.1em; transition: 0.3s; }
+.logo { color: #e50914; font-size: 2em; font-weight: bold; }
+.nav-links { display: flex; list-style: none; gap: 20px; }
+.nav-links a { color: #ccc; text-decoration: none; font-weight: bold; transition: 0.3s; }
 .nav-links a:hover { color: #fff; }
 
-.header-right { display: flex; align-items: center; gap: 15px; }
-.btn-assinar { background: #e50914; color: #fff; padding: 10px 25px; text-decoration: none; border-radius: 5px; font-weight: bold; transition: 0.3s; }
-.btn-app { background: #333; color: white; border: 1px solid #555; padding: 10px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; display: none; }
+.header-right { display: flex; gap: 15px; align-items: center; }
+.btn-assinar { background: #e50914; color: #fff; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold; }
+.btn-app { background: #333; color: white; border: 1px solid #555; padding: 10px; border-radius: 5px; cursor: pointer; }
 
-.hero-player { padding-top: 110px; display: flex; flex-direction: column; align-items: center; padding-bottom: 50px; background: linear-gradient(to bottom, #1a1a1a, #0f1014); }
-.player-container { width: 85%; max-width: 1100px; aspect-ratio: 16/9; background: #000; border-radius: 15px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.8); }
+/* PLAYER */
+.hero-player { padding-top: 120px; display: flex; flex-direction: column; align-items: center; padding-bottom: 40px; }
+.player-container { width: 85%; max-width: 1100px; aspect-ratio: 16/9; background: #000; border-radius: 10px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
 .player-container iframe { width: 100%; height: 100%; }
+.player-info { width: 85%; max-width: 1100px; margin-top: 20px; }
 
-.player-info { width: 85%; max-width: 1100px; margin-top: 25px; }
+/* GRID DE CONTEÚDO */
 .content-grid { padding: 40px 5%; }
+.genero-secao { margin-bottom: 40px; }
+.genero-titulo { font-size: 1.5em; margin-bottom: 20px; border-left: 5px solid #e50914; padding-left: 15px; }
+.genero-linha { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; }
 
-.genero-secao { margin-bottom: 50px; }
-.genero-titulo { font-size: 1.6em; margin-bottom: 25px; border-left: 6px solid #e50914; padding-left: 15px; text-transform: uppercase; }
-
-/* GRID CORRIGIDO: Agora os itens ficam alinhados em colunas perfeitas */
-.genero-linha { 
-    display: grid; 
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
-    gap: 30px; 
-}
-
-.card { cursor: pointer; transition: 0.4s; background: #16171a; border-radius: 10px; overflow: hidden; border: 1px solid #222; }
-.card:hover { transform: scale(1.05); border-color: #e50914; box-shadow: 0 10px 25px rgba(0,0,0,0.7); }
+.card { cursor: pointer; transition: 0.3s; background: #1a1a1a; border-radius: 8px; overflow: hidden; border: 1px solid #222; }
+.card:hover { transform: scale(1.05); border-color: #e50914; }
 .card img { width: 100%; height: 280px; object-fit: cover; }
-.card p { padding: 12px; text-align: center; font-weight: bold; font-size: 0.95em; color: #eee; }
+.card p { padding: 10px; text-align: center; font-weight: bold; }
 
-footer { padding: 60px 5%; text-align: center; background: #000; border-top: 1px solid #1a1a1a; margin-top: 50px; }
+/* RODAPÉ (ESTILIZADO) */
+footer { 
+    padding: 60px 5%; 
+    text-align: center; 
+    background: #000; 
+    border-top: 1px solid #1a1a1a; 
+    margin-top: 50px; 
+}
 .footer-logo { color: #e50914; font-size: 1.8em; font-weight: bold; margin-bottom: 15px; }
-.footer-links a { color: #888; margin: 0 20px; text-decoration: none; }
+.footer-links { margin-bottom: 20px; }
+.footer-links a { color: #888; text-decoration: none; margin: 0 20px; font-size: 0.9em; transition: 0.3s; }
 .footer-links a:hover { color: #e50914; }
+.copyright { color: #444; font-size: 0.8em; }
+
+/* EPISÓDIOS */
+.episode-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; margin-top: 15px; }
+.btn-episodio { background: #222; color: #fff; border: 1px solid #444; padding: 12px; cursor: pointer; border-radius: 5px; }
