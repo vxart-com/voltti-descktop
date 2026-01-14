@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VOLTTI | Desktop Streaming</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo">VOLTTI</div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#" onclick="filtrar('todos')">Início</a></li>
+                <li><a href="#" onclick="filtrar('filme')">Filmes</a></li>
+                <li><a href="#" onclick="filtrar('serie')">Séries</a></li>
+                <li><a href="#" onclick="filtrar('dorama')">Doramas</a></li>
+                <li><a href="#" onclick="filtrar('anime')">Animes</a></li>
+                <li><a href="#" onclick="filtrar('novela')">Novelas</a></li>
+            </ul>
+        </nav>
+        <div class="header-right">
+            <a href="pagar.html" id="botao-pagar" class="btn-assinar">ASSINAR MENSAL</a>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-player" id="player-section">
+            <div class="player-container">
+                <iframe id="main-player" src="" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="player-info">
+                <h1 id="video-title">Selecione um título para começar</h1>
+                <div id="lista-eps" class="episode-grid"></div>
+            </div>
+        </section>
+
+        <section class="content-grid" id="movie-grid">
+            </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 VOLTTI - Experiência Desktop</p>
+        <div class="footer-links">
+            <a href="https://wa.me/5598981296742" target="_blank">Suporte</a>
+            <a href="pagar.html">Minha Assinatura</a>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
